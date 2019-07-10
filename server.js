@@ -31,20 +31,25 @@ app.use(session({
     }
 }))
 
+//===================================================================
+// Schemas
+//===================================================================
+
+
 var AnimalSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, 'Name must be 2 characters long'],
         minlength: 2
     },
     food: {
         type: String,
-        required: true,
+        required: [true, 'Enter a Species'],
         minlength: 2
     },
     species: {
         type: String,
-        required: true,
+        required: [true, 'Enter a Favorite Food'],
         minlength: 2
     }
 }, {
@@ -52,6 +57,10 @@ var AnimalSchema = new mongoose.Schema({
 })
 mongoose.model('Animal', AnimalSchema);
 var Animal = mongoose.model('Animal');
+
+//===================================================================
+// Route to render and show index
+//===================================================================
 
 
 app.get('/', (req, res) => {
@@ -67,6 +76,10 @@ app.get('/', (req, res) => {
     })
 })
 
+//===================================================================
+// Route to render and show by id
+//===================================================================
+
 app.get('/show/:id', (req, res) => {
     Animal.findById(req.params.id, (err, animals) => {
         if (err) {
@@ -79,6 +92,10 @@ app.get('/show/:id', (req, res) => {
         }
     })
 })
+
+//===================================================================
+// Route to render and add 
+//===================================================================
 
 app.get('/new', (req, res) => {
     res.render('add')
@@ -106,6 +123,10 @@ app.post('/new', (req, res) => {
         }
     })
 })
+
+//===================================================================
+// Route to render and edit
+//===================================================================
 
 app.get('/edit/:id', (req, res) => {
     Animal.findById(req.params.id, (err, animals) => {
@@ -141,6 +162,10 @@ app.post('/edit/:id', (req, res) => {
     })
 })
 
+//===================================================================
+// Route to delete 
+//===================================================================
+
 app.get('/delete/:id', (req, res) => {
     Animal.findByIdAndRemove(req.params.id, (err) => {
         if (err) {
@@ -151,3 +176,11 @@ app.get('/delete/:id', (req, res) => {
         }
     })
 })
+
+//===================================================================
+// 404
+//===================================================================
+
+app.get('*', (req, res) => {
+	res.send("404 not a valid URL")
+});
