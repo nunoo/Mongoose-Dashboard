@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/script.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <div class="container">
+		<table class="table table-dark mt-5">
+            <a href="/new" class="btn btn-primary mt-5">Add Animal</a>
+            <thead>
+              <tr>
+                
+                <th scope="col">Name</th>
+                <th scope="col">Species</th>
+
+                <th scope="col">Favorite Food</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            <% for (var x in animals) { %>
+              <tr>
+                
+                <td> <%= animals[x].name %> </td>
+                <td> <%= animals[x].species %> </td>
+                <td> <%= animals[x].food %> </td>
+                <td>
+                    <a href="/show/<%= animals[x].id %>">show</a>  |
+                    <a href="/edit/<%= animals[x].id %>">edit</a> |
+                    <a href="/delete/<%= animals[x].id %>">delete</a>
+
+                </td>
+              </tr>
+            <% } %>
+            </tbody>
+          </table>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <div class="container border border-dark mt-5 rounded">
+		<% JSON.stringify(messages) %>
+		<% if(messages.reg) { %>
+		<% for (var x of messages.reg) { %>
+		<p class="text-danger"><%= x %></p>
+		<% } %>
+		<% } %>
+		<form action="/new" method="POST">
+			<div class="form-group">
+				<label for="" class="pt-3">Name</label>
+				<input name="name" type="text" class="form-control" placeholder="Name">
+			</div>
+            <div class="form-group">
+                <label for="">Species</label>
+                <textarea name="species" type="text" class="form-control" placeholder="Species"></textarea>
+            </div>
+			<div class="form-group">
+				<label for="">Favorite Food</label>
+				<textarea name="food" type="text" class="form-control" placeholder="Favorite Food"></textarea>
+			</div>
+			<div class="row text-center justify-content-center">
+				<input type="submit" class="btn btn-primary pl-5 pr-5 mr-2  mt-2 mb-4" value="Add an Animal">
+				
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
